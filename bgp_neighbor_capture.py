@@ -100,9 +100,11 @@ def start_troubleshooting(Neighbor):
 
     Neighbor.troubleshooting = True
 
-    start_capture(Neighbor)
-    start_logging(Neighbor)
     start_debugging(Neighbor)
+    start_capture(Neighbor)
+
+    # start_logging will block all other commands. Run last.
+    start_logging(Neighbor)
 
 
 def stop_troubleshooting(Neighbor):
@@ -134,10 +136,10 @@ def start_debugging(Neighbor):
     Neighbor - the Neighbor object to enable debugs on
     '''
 
-    debug_list = ["debug bgp keepalives in", "debug bgp update in", "debug bgp updates out"]
+    debug_list = ["debug bgp keepalives", "debug bgp updates in", "debug bgp updates out"]
 
     for debug in debug_list:
-        send_command(debug + Neighbor.ip)
+        send_command(debug + " " + Neighbor.ip)
 
 
 def stop_debugging(Neighbor):
@@ -380,6 +382,7 @@ def extract_established_neighbors(list_of_neighbor_lines):
 
     for line in list_of_neighbor_lines:
         temp_list = line.split(" ")
+
         if temp_list[len(temp_list) - 1].isdigit():
             neighbor_list.append(temp_list[0])
 
@@ -476,7 +479,7 @@ def main(argv):
 
     list_of_neighbors = []
 
-    if len(list_of_neighbors) < 1:
+    if len(ip_list) < 1:
         print "No Up neighbors"
         return False
 
