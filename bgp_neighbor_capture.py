@@ -25,6 +25,7 @@ Established BGP peer in "show ip bgp summary"
 TODO: Multithread
 TODO: Track neighbor source interface for ping
 TODO: When multithreaded, if troubleshooting more than one neighbor, don't duplicate data
+TODO: issuing the ping blocks the termination of other things. Need to figure out how to do that independently
 '''
 
 
