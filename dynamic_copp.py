@@ -290,12 +290,14 @@ def main(argv):
 
         # If a neighbor was removed the new_neighbor_list is a subset of old_neighbor_list
         if new_neighbor_list < old_neighbor_list:
-            print "Neighbor removed from list: " + repr(old_neighbor_list.difference(new_neighbor_list))
+            if debug:
+                print "Neighbor removed from list: " + repr(old_neighbor_list.difference(new_neighbor_list))
             copp_config = remove_from_copp(old_neighbor_list.difference(new_neighbor_list), copp_config)
 
         # If a neighbor was added old_neighbor_list will be a subset of new_neighbor_list
         elif new_neighbor_list > old_neighbor_list:
-            print "Neighbor added to list: " + repr(new_neighbor_list.difference(old_neighbor_list))
+            if debug:
+                print "Neighbor added to list: " + repr(new_neighbor_list.difference(old_neighbor_list))
             copp_config = add_to_copp(new_neighbor_list.difference(old_neighbor_list), copp_config)
 
         else:
