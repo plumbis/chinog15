@@ -6,3 +6,8 @@ spine[1:2]
 
 [leafs]
 leaf[1:2]
+
+[network:children]
+leafs
+spines
+
