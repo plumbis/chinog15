@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- hosts: network
+  sudo: yes
   tasks:
   - name: install license
     cl_license: src="http://192.168.0.1/{{ansible_hostname}}.lic"
