@@ -1,5 +1,6 @@
 ---
 - hosts: spine1
+  sudo: yes
   tasks:
   - name: Configure BGP peer
     shell: cl-bgp as 65001 neighbor  add 10.12.12.2 remote-as 65002
@@ -9,6 +10,7 @@
     shell: cl-bgp network add 10.12.12.0/24
 
 - hosts: leaf1
+  sudo: yes
   tasks:
   - name: Configure BGP peer spine1
     shell: cl-bgp as 65002 neighbor add 10.12.12.1 remote-as 65001
@@ -22,6 +24,7 @@
     shell: cl-bgp network add 10.23.23.0/24
 
 - hosts: leaf2
+  sudo: yes
   tasks:
   - name: Configure BGP peer
     shell: cl-bgp as 65003 neighbor add 10.23.23.2 remote-as 65002
