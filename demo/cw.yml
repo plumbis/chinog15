@@ -3,49 +3,43 @@
   sudo: yes
   tasks:
   - name: Generate WB key
-    user: name=cumulus generate_ssh_key
+    user: name=cumulus generate_ssh_key=yes
 
   - name: Copy baseline interfaces 
-    copy: src=/Users/plumbis/git/chinog/demo/interfaces dest=/var/www/inter
+    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/interfaces dest=/var/www/interfaces
 
   - name: Copy ZTP script
-    copy: src=/Users/plumbis/git/chinog/demo/provision.sh dest=/var/www/provisi
+    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/provision.sh dest=/var/www/provision.sh
 
   - name: Delete old onie-installer
-    file: src=/var/www/CumulusLinux-2.5.2-powerpc.bin state
+    file: src=/var/www/CumulusLinux-2.5.2-powerpc.bin state=link dest=onie-installer
 
   - name: Delete old onie-installer-powerpc
-    file: src=/var/www/CumulusLinux-2.5.2-powerpc.bin state
+    file: src=/var/www/CumulusLinux-2.5.2-powerpc.bin state=link dest=onie-installer-powerpc
 
   - name: Delete old onie-x86
-    file: src=/var/www/CumulusLinux-2.5.2-amd64.bin state
-
-  - name: Download Interfaces file
-    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/interfaces dest=/var/www/inter
-
-  - name: Download ZTP script
-    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/provision.sh dest=/var/www/provisi
+    file: src=/var/www/CumulusLinux-2.5.2-amd64.bin state=link dest=onie-installer-x86
 
   - name: Add ZTP DHCP option
     lineinfile: dest=/etc/dhcp/dhcpd.pools regexp="cumulus-provision-url" line="  option cumulus-provision-url "http://192.168.0.1/provision.sh";" state=present
     notify:
-       - restart isc-dhcp-s
+       - restart isc-dhcp-server
 
   - name: Download ansible config
-    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/ansible.cfg dest=/home/cu
+    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/ansible.cfg dest=/home/cumulus
 
   - name: Download ansible hosts
-    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/ansible.hosts dest=/home/cu
+    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/ansible.hosts dest=/home/cumulus
 
   - name: Download lab provision playbook
-    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/reprovision.yml dest=/home/cu
+    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/reprovision.yml dest=/home/cumulus
 
   - name: Download main playbook
-    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/main_network.yml dest=/home/cu
+    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/main_network.yml dest=/home/cumulus
 
   - name: Delete known hosts
-    file: path=/home/cumulus/.ssh/known_hosts state=a
+    file: path=/home/cumulus/.ssh/known_hosts state=absent
 
   handlers:
    - name: restart isc-dhcp-server
-     service: name=isc-dhcp-server state=res
+     service: name=isc-dhcp-server state=restarted
