@@ -1,8 +1,9 @@
 ---
 tasks:
-    - include license.yml
-    - include ports.yml
-    - include interfaces.yml
-    - include quaggad.yml
-    - include bgp.yml
-    - include github.yml
+   - include: reprovision.yml
+   - include: license.yml
+   - include: ports.yml
+   - include: interfaces.yml
+   - include: quaggad.yml
+   - include: bgp.yml
+   - include: github.yml

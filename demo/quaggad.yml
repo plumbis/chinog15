@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- hosts: network
+  sudo: yes
   tasks:
   - name: Enable BGP
     cl_quagga_protocol: name="bgpd" state="present"

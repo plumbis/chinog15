@@ -1,5 +1,6 @@
 ---
 - hosts: spine1
+  sudo: yes
   tasks:
   - name: spine1-leaf1
     cl_interface: name=swp49 ipv4=10.12.12.1/24
@@ -14,6 +15,7 @@
      service: name=switchd state=restarted
 
 - hosts: leaf1
+  sudo: yes
   tasks:
   - name: spine1-leaf1
     cl_interface: name=swp1s0 ipv4=10.12.12.2/24
@@ -30,6 +32,7 @@
       service: name=switchd state=restarted
 
 - hosts: leaf2
+  sudo: yes
   tasks:
   - name: lo
     cl_interface: name=lo ipv4=10.3.3.3/32

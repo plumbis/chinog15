@@ -6,3 +6,5 @@
     command: cl-img-select -if
   - name: Reboot lab
     command: reboot
+  - name: Wait for lab
+    wait_for: port=22

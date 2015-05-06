@@ -51,7 +51,9 @@
 
   - name: Download BGP playbooks
     get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/bgp.yml dest=/home/cumulus
-    
+
+  - name: Download Script of stuff to do
+    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/script dest=/home/cumulus
   handlers:
    - name: restart isc-dhcp-server
      service: name=isc-dhcp-server state=restarted
