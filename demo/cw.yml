@@ -34,12 +34,24 @@
   - name: Download lab provision playbook
     get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/reprovision.yml dest=/home/cumulus
 
-  - name: Download main playbook
-    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/main_network.yml dest=/home/cumulus
+  - name: Download license playbook
+    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/license.yml dest=/home/cumulus
 
-  - name: Delete known hosts
-    file: path=/home/cumulus/.ssh/known_hosts state=absent
+  - name: Download ports playbook
+    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/ports.yml dest=/home/cumulus
 
+  - name: Download interfaces playbook
+    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/interfaces.yml dest=/home/cumulus
+
+  - name: Download Quagga Daemons playbook
+    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/quaggad.yml dest=/home/cumulus
+
+  - name: Download demo scripts playbook
+    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/github.yml dest=/home/cumulus
+
+  - name: Download BGP playbooks
+    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/bgp.yml dest=/home/cumulus
+    
   handlers:
    - name: restart isc-dhcp-server
      service: name=isc-dhcp-server state=restarted
