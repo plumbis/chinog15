@@ -12,13 +12,13 @@
     get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/provision.sh dest=/var/www/provision.sh
 
   - name: Delete old onie-installer
-    file: src=/var/www/CumulusLinux-2.5.2-powerpc.bin state=link dest=onie-installer
+    file: src=/var/www/CumulusLinux-2.5.2-powerpc.bin state=link dest=/var/www/onie-installer
 
   - name: Delete old onie-installer-powerpc
-    file: src=/var/www/CumulusLinux-2.5.2-powerpc.bin state=link dest=onie-installer-powerpc
+    file: src=/var/www/CumulusLinux-2.5.2-powerpc.bin state=link dest=/var/www/onie-installer-powerpc
 
   - name: Delete old onie-x86
-    file: src=/var/www/CumulusLinux-2.5.2-amd64.bin state=link dest=onie-installer-x86
+    file: src=/var/www/CumulusLinux-2.5.2-amd64.bin state=link dest=/var/www/onie-installer-x86
 
   - name: Add ZTP DHCP option
     lineinfile: dest=/etc/dhcp/dhcpd.pools regexp="cumulus-provision-url" line="  option cumulus-provision-url "http://192.168.0.1/provision.sh";" state=present
