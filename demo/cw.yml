@@ -3,7 +3,7 @@
   sudo: yes
   tasks:
   - name: Generate WB key
-    user: name=cumulus generate_ssh_ke
+    user: name=cumulus generate_ssh_key
 
   - name: Copy baseline interfaces 
     copy: src=/Users/plumbis/git/chinog/demo/interfaces dest=/var/www/inter
