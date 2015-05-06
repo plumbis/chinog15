@@ -1,4 +1,5 @@
--hosts: me
+---
+- hosts: me
     tasks:
         - name: Generate WB key
           user: name=cumulus generate_ssh_key=yes
@@ -27,7 +28,7 @@
         - name: Add ZTP DHCP option
           lineinfile: dest=/etc/dhcp/dhcpd.pools regexp="cumulus-provision-url" line="  option cumulus-provision-url "http://192.168.0.1/provision.sh";" state=present
           notify:
-          - restart isc-dhcp-server
+             - restart isc-dhcp-server
 
         - name: Download ansible config
           get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/ansible.cfg dest=/home/cumulus
