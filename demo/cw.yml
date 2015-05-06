@@ -40,6 +40,9 @@
         - name: Download lab provision playbook
           get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/reprovision.yml dest=/home/cumulus
 
+        - name: Download main playbook
+          get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/main_network.yml dest=/home/cumulus
+
         - name: Delete known hosts
           file: path=/home/cumulus/.ssh/known_hosts state=absent
 
