@@ -1,0 +1,28 @@
+=========
+Add MAC SSH Keys to CW
+=========
+cat ~/.ssh/id_rsa.pub | ssh wbench417@workbench.cumulusnetworks.com "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"
+
+=========
+Install Ansible on CW
+=========
+sudo apt-get install ansible
+
+
+wget https://raw.githubusercontent.com/plumbis/chinog15/master/demo/cw.yml
+
+ansible-playbook cw.yml
+
+ansible-playbook reprovision.yml
+
+ansible-playbook license.yml
+
+ansible-playbook port.yml
+
+ansible-playbook interfaces.yml
+
+ansible-playbook quaggad.yml
+
+ansible-playbook bgp.yml
+
+ansible-playbook github.yml

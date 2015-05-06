@@ -1,5 +1,6 @@
 ---
 - hosts: me
+    sudo: yes
     tasks:
         - name: Generate WB key
           user: name=cumulus generate_ssh_key=yes
@@ -23,7 +24,7 @@
           get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/interfaces dest=/var/www/interfaces
 
         - name: Download ZTP script
-          get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/provision.sh dest=/var/www/interfaces
+          get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/provision.sh dest=/var/www/provision.sh
 
         - name: Add ZTP DHCP option
           lineinfile: dest=/etc/dhcp/dhcpd.pools regexp="cumulus-provision-url" line="  option cumulus-provision-url "http://192.168.0.1/provision.sh";" state=present
@@ -35,6 +36,12 @@
 
         - name: Download ansible hosts
           get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/ansible.hosts dest=/home/cumulus
+
+        - name: Download lab provision playbook
+          get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/demo/reprovision.yml dest=/home/cumulus
+
+        - name: Delete known hosts
+          file: path=/home/cumulus/.ssh/known_hosts state=absent
 
         handlers:
          - name: restart isc-dhcp-server

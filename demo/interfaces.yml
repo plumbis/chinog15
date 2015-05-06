@@ -1,0 +1,43 @@
+---
+- hosts: spine1
+  tasks:
+  - name: spine1-leaf1
+    cl_interface: name=swp49 ipv4=10.12.12.1/24
+    notify: restart switchd
+
+  - name: loopback
+    cl_interface: name=lo ipv4=10.1.1.1/32
+    notify: restart switchd
+
+  handlers:
+   - name: restart switchd
+     service: name=switchd state=restarted
+
+- hosts: leaf1
+  tasks:
+  - name: spine1-leaf1
+    cl_interface: name=swp1s0 ipv4=10.12.12.2/24
+    notify: restart switchd
+  - name: loopback
+    cl_interface: name=lo ipv4=10.2.2.2/32
+    notify: restart switchd
+  - name: leaf1-leaf2
+    cl_interface: name=swp17 ipv4=10.23.23.2/24
+    notify: restart switchd
+
+  handlers:
+    - name: restart switchd
+      service: name=switchd state=restarted
+
+- hosts: leaf2
+  tasks:
+  - name: lo
+    cl_interface: name=lo ipv4=10.3.3.3/32
+    notify: restart switchd
+  - name: leaf2-leaf1
+    cl_interface: name=swp17 ipv4=10.23.23.3/24
+    notify: restart switchd
+
+  handlers:
+    - name: restart switchd
+      service: name=switchd state=restarted

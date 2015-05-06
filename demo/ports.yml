@@ -1,0 +1,10 @@
+---
+- hosts: leafs
+  tasks:
+  - name: breakout 40G ports
+    cl_ports: speed_4_by_10g="swp1"
+    notify: restart switchd
+
+  handlers:
+   - name: restart switchd
+     service: name=switchd state=restarted

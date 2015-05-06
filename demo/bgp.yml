@@ -1,0 +1,31 @@
+---
+- hosts: spine1
+  tasks:
+  - name: Configure BGP peer
+    shell: cl-bgp as 65001 neighbor  add 10.12.12.2 remote-as 65002
+  - name: Add lo
+    shell: cl-bgp network add 10.1.1.1/32
+  - name: Add ethernet
+    shell: cl-bgp network add 10.12.12.0/24
+
+- hosts: leaf1
+  tasks:
+  - name: Configure BGP peer spine1
+    shell: cl-bgp as 65002 neighbor add 10.12.12.1 remote-as 65001
+  - name: Configure BGP peer leaf2
+    shell: cl-bgp as 65002 neighbor add 10.23.23.3 remote-as 65003
+  - name: Add lo
+    shell: cl-bgp network add 10.2.2.2/32
+  - name: Add ethernet to spine1
+    shell: cl-bgp network add 10.12.12.0/24
+  - name: Add ethernet to leaf2
+    shell: cl-bgp network add 10.23.23.0/24
+
+- hosts: leaf2
+  tasks:
+  - name: Configure BGP peer
+    shell: cl-bgp as 65003 neighbor add 10.23.23.2 remote-as 65002
+  - name: Add lo
+    shell: cl-bgp network add 10.3.3.3/32
+  - name: Add ethernet
+    shell: cl-bgp network add 10.23.23.0/24
