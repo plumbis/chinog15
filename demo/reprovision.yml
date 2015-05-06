@@ -1,0 +1,8 @@
+---
+- hosts: network
+  sudo: yes
+  tasks:
+  - name: Reprovision lab
+    command: cl-img-select -if
+  - name: Reboot lab
+    command: reboot
