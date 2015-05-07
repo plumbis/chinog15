@@ -6,5 +6,8 @@
     command: cl-img-select -if
   - name: Reboot lab
     command: reboot
-  - name: Wait for lab
-    wait_for: port=22
+
+- hosts: me
+  tasks:
+  - name: Delete known hosts
+    file: path=/home/cumulus/.ssh/known_hosts state=absent
