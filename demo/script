@@ -11,6 +11,10 @@ sudo apt-get install ansible
 
 wget https://raw.githubusercontent.com/plumbis/chinog15/master/demo/cw.yml
 
+wget https://raw.githubusercontent.com/plumbis/chinog15/master/demo/ansible.hosts
+
+wget https://raw.githubusercontent.com/plumbis/chinog15/master/demo/ansible.cfg
+
 ansible-playbook cw.yml
 
 ansible-playbook reprovision.yml
