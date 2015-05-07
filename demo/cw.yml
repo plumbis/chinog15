@@ -21,7 +21,7 @@
     file: src=/var/www/CumulusLinux-2.5.2-amd64.bin state=link dest=/var/www/onie-installer-x86
 
   - name: Add ZTP DHCP option
-    lineinfile: dest=/etc/dhcp/dhcpd.pools regexp="cumulus-provision-url" line="  option cumulus-provision-url "http://192.168.0.1/provision.sh";" state=present
+    lineinfile: dest=/etc/dhcp/dhcpd.pools regexp="cumulus-provision-url" line="  option cumulus-provision-url \"http://192.168.0.1/provision.sh\";" state=present
     notify:
        - restart isc-dhcp-server
 
