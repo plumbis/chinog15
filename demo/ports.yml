@@ -1,5 +1,6 @@
 ---
 - hosts: leafs
+  sudo: yes
   tasks:
   - name: breakout 40G ports
     cl_ports: speed_4_by_10g="swp1"
