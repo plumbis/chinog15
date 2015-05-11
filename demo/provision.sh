@@ -9,7 +9,7 @@ exec >/var/log/autoprovision 2>&1
 
 trap error ERR
 
-URL="http://192.168.0.1/keys"
+URL="http://192.168.0.1/authorized_keys"
 
 mkdir -p /root/.ssh
 /usr/bin/wget -O /root/.ssh/authorized_keys $URL
