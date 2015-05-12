@@ -19,6 +19,8 @@ ansible-playbook cw.yml
 
 ansible-playbook reprovision.yml
 
+tail -f /var/log/apache2/access.log
+
 ansible-playbook license.yml
 
 ansible-playbook ports.yml
