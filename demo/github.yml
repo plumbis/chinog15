@@ -9,5 +9,5 @@
 
 - hosts: leaf2
   tasks: 
-    - name: download BGP neighbor capture
-    get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/bgp_neighbor_capture.py dest=/home/cumulus/bgp_neighbor_capture.py
+   - name: download BGP neighbor capture
+     get_url: url=https://raw.githubusercontent.com/plumbis/chinog15/master/bgp_neighbor_capture.py dest=/home/cumulus/bgp_neighbor_capture.py
