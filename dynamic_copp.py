@@ -191,8 +191,8 @@ def initalize_copp_config(copp_file):
     # 
     # -A $INGRESS_CHAIN --in-interface $INGRESS_INTF -s $BGP4_PEERS -p tcp --dport bgp -j POLICE --set-mode pkt --set-rate 2000 --set-burst 2000
     # -A $INGRESS_CHAIN --in-interface $INGRESS_INTF -s $BGP4_PEERS -p tcp --sport bgp -j POLICE --set-mode pkt --set-rate 2000 --set-burst 2000
-    # -A $INGRESS_CHAIN -p tcp --sport bgp -j DROP
-    # -A $INGRESS_CHAIN -p tcp --dport bgp -j DROP
+    # -A $INGRESS_CHAIN --in-interface $INGRESS_INTF -p tcp --sport bgp -j DROP
+    # -A $INGRESS_CHAIN --in-interface $INGRESS_INTF -p tcp --dport bgp -j DROP
     #
     # -A $INGRESS_CHAIN --in-interface $INGRESS_INTF -s BGP6_PEERS -p tcp --dport bgp -j SETCLASS --class 7
     # -A $INGRESS_CHAIN --in-interface $INGRESS_INTF -s BGP6_PEERS -p tcp --sport bgp -j SETCLASS --class 7
@@ -222,8 +222,8 @@ def initalize_copp_config(copp_file):
             config_list.append("-A $INGRESS_CHAIN --in-interface $INGRESS_INTF -s $BGP4_PEERS -p tcp --sport bgp -j SETCLASS --class 7")
             config_list.append("-A $INGRESS_CHAIN --in-interface $INGRESS_INTF -s $BGP4_PEERS -p tcp --dport bgp -j POLICE --set-mode pkt --set-rate 2000 --set-burst 2000")
             config_list.append("-A $INGRESS_CHAIN --in-interface $INGRESS_INTF -s $BGP4_PEERS -p tcp --sport bgp -j POLICE --set-mode pkt --set-rate 2000 --set-burst 2000")
-            config_list.append("-A $INGRESS_CHAIN -p tcp --sport bgp -j DROP")
-            config_list.append("-A $INGRESS_CHAIN -p tcp --dport bgp -j DROP")
+            config_list.append("-A $INGRESS_CHAIN --in-interface $INGRESS_INTF -p tcp --sport bgp -j DROP")
+            config_list.append("-A $INGRESS_CHAIN --in-interface $INGRESS_INTF -p tcp --dport bgp -j DROP")
             config_list.append("")
             continue
 
