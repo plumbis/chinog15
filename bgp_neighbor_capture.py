@@ -251,10 +251,6 @@ def neighbor_received_message(Neighbor):
     time = datetime.datetime.now()
     now = datetime.timedelta(hours=time.hour, minutes=time.minute, seconds=time.second)
 
-    if debug:
-        print "Last Run"
-        print Neighbor.last_run
-
     # don't do anything if we haven't waited at least one keepalive since last check
     if now < Neighbor.last_run + Neighbor.keepalive:
         return True
@@ -497,9 +493,6 @@ def main(argv):
     # No thread support today, so neighbor is static. 
     # In the future a thread would be spawned for each Neighbor object
     neighbor1 = list_of_neighbors[0]
-
-    if debug:
-        print neighbor1
 
     # keep checking if the neighbor is alive, if not, bail.
     while(bgp_neighbor_up(neighbor1.ip)): 
