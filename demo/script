@@ -1,7 +1,7 @@
 =========
 Add MAC SSH Keys to CW
 =========
-cat ~/.ssh/id_rsa.pub | ssh wbench417@workbench.cumulusnetworks.com "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"
+cat ~/.ssh/id_rsa.pub | ssh wbench421@workbench.cumulusnetworks.com "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"
 
 =========
 Install Ansible on CW
@@ -33,3 +33,34 @@ ansible-playbook bgp.yml
 
 ansible-playbook github.yml
 
+==================
+Dynamic CoPP
+==================
+Open second window to CW
+
+Window 1 (CW): 
+sudo python dynamic_copp.py&
+watch "sudo cl-acltool -L ip | grep bgp"
+
+Window 2 (leaf1): 
+sudo cl-bgp neighbor add 192.168.200.200 remote-as 200
+# check watch window, see update.
+sudo cl-bgp neighbor add 192.168.200.200 remote-as 200
+
+
+==================
+BGP Neighbor Troubleshooting
+==================
+Start BGP troubleshooting on leaf2
+sudo python bgp_neighbor_capture.py --debug
+
+Install Drop rule on leaf1
+sudo vi /etc/cumulus/acl/policy.d/00control_plane.rules
+
+-A OUTPUT --out-interface $INGRESS_INTF -p tcp --dport  bgp -j DROP
+-A OUTPUT  --out-interface $INGRESS_INTF -p tcp --sport bgp -j DROP
+
+sudo cl-acltool -i
+
+View capture
+tcpdump -r <file> | grep bgp

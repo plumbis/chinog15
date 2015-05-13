@@ -219,7 +219,7 @@ def start_capture(Neighbor):
     # TCPdump is dumb and can't limit a single capture based on size.
     # 10k packets is arbritary. This is about 15megs at 1500 bytes of .64 megs at 64k. I assume we can detect the trend either way.
 
-    capture_string = "nohup tcpdump -W 1 -c 10000 -s 0 -w 'bgp_auto_capture_" + Neighbor.ip + "_" + datetime.datetime.now().strftime("%m%d%Y_%H%M%S") + ".pcap'"
+    capture_string = "nohup tcpdump -W 1 -c 10000 -s 0 -w 'bgp_auto_capture_" + Neighbor.ip + "_" + datetime.datetime.now().strftime("%m%d%Y_%H%M%S") + ".pcap' -i any not port 22"
 
     Neighbor.set_proc(Popen(capture_string, shell=True, stdout=PIPE, stderr=PIPE))
 

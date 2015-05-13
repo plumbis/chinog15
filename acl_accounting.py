@@ -8,7 +8,7 @@ from subprocess import Popen, PIPE
 
 debug = False
 acl_file = "acl-baseline.pkl"
-idle_time = datetime.timedelta(minutes=5)
+idle_time = datetime.timedelta(minutes=1)
 
 def get_acl():
     '''
