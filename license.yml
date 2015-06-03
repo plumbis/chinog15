@@ -1,0 +1,13 @@
+---
+- hosts: network
+  sudo: yes
+  tasks:
+  - name: install license
+    cl_license: src="http://192.168.0.1/{{ansible_hostname}}.lic"
+    notify:
+    - restart switchd
+
+  handlers:
+   - name: restart switchd
+     service: name=switchd state=restarted
+#comment

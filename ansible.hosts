@@ -1,0 +1,16 @@
+[me]
+localhost
+
+[spines]
+spine[1:2]
+
+[leafs]
+leaf[1:2]
+
+[network:children]
+leafs
+spines
+
+[network:vars]
+ansible_sudo_pass=CumulusLinux!
+ansible_ssh_pass=CumulusLinux!

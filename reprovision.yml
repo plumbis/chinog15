@@ -1,0 +1,13 @@
+---
+- hosts: network
+  sudo: yes
+  tasks:
+  - name: Reprovision lab
+    command: cl-img-select -if
+  - name: Reboot lab
+    command: reboot
+
+- hosts: me
+  tasks:
+  - name: Delete known hosts
+    file: path=/home/cumulus/.ssh/known_hosts state=absent
